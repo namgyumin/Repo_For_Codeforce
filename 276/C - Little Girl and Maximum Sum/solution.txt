@@ -1,0 +1,32 @@
+import sys
+ 
+dic = []
+ 
+n, q = map(int, sys.stdin.readline().split())
+ 
+values = list(map(int, sys.stdin.readline().split()))
+values.sort(reverse=True)
+ 
+start = [0 for _ in range(n)]
+end = [0 for _ in range(n)]
+ 
+value = [0 for _ in range(n)]
+ 
+for i in range(q):
+    s, e = map(int ,sys.stdin.readline().split())
+    start[s-1] += 1
+    end[e-1] += 1
+ 
+updateValue = 0
+for i in range(n):
+    updateValue += start[i]
+    value[i] = updateValue
+    updateValue -= end[i]
+ 
+value.sort(reverse=True)
+ 
+ret = 0
+for i in range(n):
+    ret += value[i] * values[i]
+ 
+print(ret)
